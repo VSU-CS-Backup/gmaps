@@ -24,6 +24,9 @@ class CitiesController < ApplicationController
   # GET /cities/1.json
   def show
     @city = City.find(params[:id])
+    
+    @office = City.new(:name => "1500 N. Patterson St. Valdosta", :state => "GA")
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +38,7 @@ class CitiesController < ApplicationController
   # GET /cities/new.json
   def new
     @city = City.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @city }
