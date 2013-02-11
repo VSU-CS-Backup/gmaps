@@ -3,7 +3,16 @@ class CitiesController < ApplicationController
   # GET /cities.json
   def index
     @cities = City.all
-    @json = @cities.to_gmaps4rails
+    @json = @cities.to_gmaps4rails do |city, marker|
+      marker.infowindow render_to_string(:partial => "/cities/infowindow", :locals => { :city => city})
+      marker.title "#{city.name}"
+      marker.json({ :population => city.population})
+      marker.picture({:picture => "assets/sight-2.png",
+                    :width => 32,
+                    :height => 32})
+    end
+    
+    #@json = @cities.to_gmaps4rails
 
     respond_to do |format|
       format.html # index.html.erb
