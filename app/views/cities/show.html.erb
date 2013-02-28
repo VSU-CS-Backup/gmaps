@@ -36,3 +36,7 @@
 
 <%= gmaps({ "direction" => { "data" => { "from" => @office.name + ", " + @office.state, "to" => @city.name + ", " + @city.state } } })%>
 
+<p>
+  <b>Distance</b>
+  <%= @distance %>
+</p>

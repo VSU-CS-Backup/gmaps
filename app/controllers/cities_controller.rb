@@ -27,7 +27,12 @@ class CitiesController < ApplicationController
     
     @office = City.new(:name => "1500 N. Patterson St. Valdosta", :state => "GA")
 
-
+    @output = Gmaps4rails.destination({:from => "#{@office.name}, #{@office.state}", 
+                                       :to => "#{@city.name}, #{@city.state}"})
+    
+    @distance = @output.first["distance"]["text"]
+    # The following converts the distance from a string to a float
+    # @distance = @output.first["distance"]["text"].to_f
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @city }
